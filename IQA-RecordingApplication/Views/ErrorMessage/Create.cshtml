@@ -1,0 +1,65 @@
+﻿@model IQA_RecordingApplication.Models.CreateErrorMessageViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Add Error Message</h2>
+
+<link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+<hr />
+<div class="row">
+    <div class="col-md-12">
+
+        <form asp-action="Create">
+            @Html.HiddenFor(q => q.ProductId)
+            @Html.HiddenFor(q => q.ErrorMessageCheckBoxes)
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"><b> Error Message</b></label>
+                <input asp-for="Message" class="form-control" id="Message" aria-describedby="Message" placeholder="Message..." />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <br />
+            <hr />
+
+            <h4> Error Messages Suggestions below:  </h4>
+
+            <table class="table table-hover table-responsive table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>CheckBox</th>
+                        <th>Message Number</th>
+                        <th> Error Message</th>
+                    </tr>
+                </thead>
+                
+
+                @if (Model.ErrorMessageCheckBoxes.Count() > 0)
+                {
+
+            @for (int i = 0; i < Model.ErrorMessageCheckBoxes.Count(); i++)
+            {
+               
+            <tr>
+                <td> @Html.CheckBoxFor(q => q.ErrorMessageCheckBoxes[i].IsChecked)</td>
+                <td>@i</td>
+                <td>@Model.ErrorMessageCheckBoxes[i].Text</td>
+            </tr>
+            }
+          }
+            </table>
+
+            <div class="form-group">
+
+                <input type="submit" value="Submit & Add More" class="btn btn-primary btn-block" /> 
+                <input type="submit" value="Submit & Start Recording" asp-action="Index" class="btn btn-danger btn-block" /> 
+               @* <a class="btn btn-outline-secondary btn-block" asp-action="Index">Back to List</a>*@
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

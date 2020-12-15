@@ -1,0 +1,45 @@
+﻿@model IQA_RecordingApplication.Models.CreateCustomerCodeViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+
+
+<h2>Add Customer Code</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            @Html.HiddenFor(q => q.ProductId)
+            <div class="form-group">
+                <a class="btn btn-outline-secondary btn-block" asp-action="Index">Back to Customer Code List</a>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerCodeName" class="control-label">Customer Code</label>
+                <input asp-for="CustomerCodeName" class="form-control" id="CustomerCodeName" aria-describedby="CustomerCodeName" placeholder="Name..."/>
+                <span asp-validation-for="CustomerCodeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerCodeDescription" class="control-label">Customer Code Description</label>
+                <textarea asp-for="CustomerCodeDescription" class="form-control" placeholder="Description..." type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"></textarea>
+                <span asp-validation-for="CustomerCodeDescription" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Submit and Next" class="btn btn-primary btn-block" /> 
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
